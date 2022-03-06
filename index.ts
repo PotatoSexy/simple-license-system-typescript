@@ -43,7 +43,7 @@ auth.get("/api/v1/create", (req: any, res: any) => {
 
     if(prvkey !== privateKey) return res.json({ msg: "Invalid private key provided", success: false });
     var check = keyModel.findOne({ key: key })
-    if(!check) return res.json({ msg: "Key not found", success: false });
+    if(check) return res.json({ msg: "Key already exist", success: false });
     new keyModel({
         key: key,
         hwid: hwid
